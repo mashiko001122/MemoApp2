@@ -23,12 +23,10 @@ Hello.defaultProps = {
 };
 
 const styles = StyleSheet.create({
- text:{
+ containert:{
      color : '#ffffff',
-     backgroundColor : 'blue',
-     fontSize : 40,
-     fontWeight : 'bold',
-     padding : 16,
+     backgroundColor : '#F0F4F8',
+
  },
 })
 export default Hello;
