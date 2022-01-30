@@ -2,11 +2,14 @@ import React,{ useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput,TouchableOpacity, Alert } from 'react-native';
 import firebase from 'firebase';
 import Button from '../components/Button';
+import Loading from '../components/Loading';
+
 
 export default function LogInScreen(props) {
     const { navigation } =props;
     const [email, setEmail] = useState('');
     const [password,setPassword]  = useState('');
+    const [isRoading ,setRoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -15,12 +18,15 @@ export default function LogInScreen(props) {
                     index: 0,
                     routes: [{ name: 'MemoList' }],
                 });
+            } else {
+                setLoading(false);
             }
         });
         return unsubscribe;
     }, []);
 
     function handlePress() {
+        setLoading(ture);
         firebase.auth().signInWithEmailAndPassword(email,password)
         .then((userCredential) => {
             const { user } = userCredential;
@@ -28,11 +34,15 @@ export default function LogInScreen(props) {
 
         }).catch((error) =>  {
             Alert.alert(error.code)
+        })
+        .then(() => {
+            setLoading(false);
         });
     }
 
     return (
         <View style={styles.container}>
+            <Loading isRoading={isRoading} />
             <View style={styles.inner}>
                 <Text style={styles.title}>Log In</Text>
                 <TextInput
