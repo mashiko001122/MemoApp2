@@ -4,6 +4,7 @@ import { View, TextInput, StyleSheet, KeyboardAvoidingView, Alert,
 import { shape,string } from 'prop-types';
 import CircleButton from '../components/CircleButton';
 import firebase from 'firebase';
+import { translateErrors } from '../utils';
 
 export default function MemoEditScreen(props) {
     const { navigation, route  } = props;
@@ -24,7 +25,8 @@ export default function MemoEditScreen(props) {
                 navigation.goBack();
             })
             .catch((error) => {
-                Alert.alert(error.code);
+                const errorMsg = translateErrors(error.code);
+                Alert.alert(errorMsg.tirle, errorMsg.description );
             });
         }
 
