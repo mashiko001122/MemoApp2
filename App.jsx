@@ -10,6 +10,7 @@ import MemoEditScreen from './src/screens/MemoEditScreen';
 import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
+import { LogBox } from 'react-native';
 
 require('firebase/firestore');
 
@@ -19,6 +20,7 @@ if (firebase.apps.length === 0) {
 }
 
 const Stack = createStackNavigator();
+LogBox.ignoreLogs(['Setting a Timer']);
 
 export default function App() {
   return (
